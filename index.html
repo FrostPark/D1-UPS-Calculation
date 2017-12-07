@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Author" content="Christian Gatzen, Signum Dokumentation und Visualisierung GmbH <www.signum.me>" />
+<meta name="Copyright" content="Esser | Novar GmbH a Honeywell Company" />
+<title>Calculation tool 24V DC emergency power supply</title>
+<link href="style/style.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="style/print.css" rel="stylesheet" type="text/css" media="print" />
+<link rel="stylesheet" href="style/webfont.min.css" />
+<link rel="shortcut icon" href="images/favicon.ico" />
+
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/cufon-yui.js" type="text/javascript"></script>
+<script src="js/devices.js" type="text/javascript"></script>
+<script src="js/translation.js" type="text/javascript"></script>
+<script src="js/calculator.js" type="text/javascript"></script>
+<script src="js/helvlc_200.font.js" type="text/javascript"></script>
+<script src="js/helvbc_700.font.js" type="text/javascript"></script>
+
+</head>
+<body onload="init()">
+<div id="jscripthint">You need to activate JavaScript within your browser to use the calculation tool.<br />Sie müssen JavaScript in Ihrem Browser aktivieren um das Berechnungstool benutzen zu können.</div>
+<script type="text/javascript">$('#jscripthint').hide();</script>
+<div id="container">
+	<div id="langchange"><a href="javascript:setLang('de');"><img src="images/flag-de.png" width="20" alt="english" valign="middle" /> Deutsch</a> | <a href="javascript:setLang('en');"><img src="images/flag-en.png" width="20" alt="english" valign="middle" /> English</a> | <a href="javascript:setLang('kr');"><img src="images/flag-kr.png" width="20" alt="한국어" valign="middle" /> 한국어</a></div>
+	<div id="helpbutton"><a href="#" onclick="toggleHelp();">Hilfe</a></div>
+	<div id="header">
+		<h1><script type="text/javascript">p(0);</script></h1>
+	</div>
+	<form action="#">
+		<div id="content">
+			<div id="tab1" class="tab">
+				<h2><strong><script type="text/javascript">p(50);</script></strong>: <script type="text/javascript">p(51);</script></h2>
+				<label><script type="text/javascript">p(2);</script></label>
+				<input type="text" id="projectname" class="large" />
+				<br />
+				<label><script type="text/javascript">p(3);</script></label>
+				<input type="text" id="projectnumber" class="large" />
+				<br />
+				<label><script type="text/javascript">p(4);</script></label>
+				<input type="text" id="creationdate" class="large" />
+				<br />
+				<label><script type="text/javascript">p(5);</script></label>
+				<input type="text" id="name" class="large" />
+				<br />
+				<label><script type="text/javascript">p(6);</script></label>
+				<input type="text" id="email" class="large" />
+				<br />
+				<label><script type="text/javascript">p(7);</script></label>
+				<input type="text" id="tel" class="large" />
+				<br />
+				<label><script type="text/javascript">p(8);</script></label>
+				<input type="text" id="fax" class="large" />
+				<br />
+			</div>
+			<div id="tab2" class="tab">
+				<h2><strong><script type="text/javascript">p(47);</script></strong>: <script type="text/javascript">p(49);</script></h2>
+				<label class="large"><script type="text/javascript">p(14);</script></label>
+				<input type="text" id="emergencycurrenttime" value="30" class="size3" onkeyup="checkmax(this,0,72,false);" onblur="checkmax(this,0,72,true);" /><br />
+				<label class="large"><script type="text/javascript">p(15);</script></label>
+				<input type="text" id="alarmemergencycurrenttime" value="0.5" class="size3" onkeyup="checkmax(this,0,8,false);" onblur="checkmax(this,0,8,true);" /><br />
+				<h3><strong><script type="text/javascript">p(47);</script></strong>: <script type="text/javascript">p(20);</script></h3>
+				<label class="large"><script type="text/javascript">p(48);</script></label>
+				<span class="inputhint"><script type="text/javascript">p(43);</script><br /><script type="text/javascript">p(44);</script><br /><script type="text/javascript">p(45);</script><br /><script type="text/javascript">p(46);</script></span>
+				<select name="amplifiermode" id="amplifiermode" class="large">
+					<option value="2"><script type="text/javascript">p(38);</script></option>
+					<option value="1"><script type="text/javascript">p(37);</script></option>					
+					<option value="3"><script type="text/javascript">p(39);</script></option>
+				</select><br />
+				<h3><strong><script type="text/javascript">p(47);</script></strong>: <script type="text/javascript">p(22);</script></h3>
+				<label class="large"><script type="text/javascript">p(22);</script></label>
+				<span class="inputhint"><script type="text/javascript">p(24);</script><br /><script type="text/javascript">p(25);</script></span>
+				<select name="burstratio" id="burstratio" class="large">
+					<option value="1"><script type="text/javascript">p(31);</script></option>
+					<option value="2"><script type="text/javascript">p(32);</script></option>
+					<option value="3"><script type="text/javascript">p(33);</script></option>
+				</select><br />
+			</div>
+			<div id="tab3" class="tab">
+				<h2><strong><script type="text/javascript">p(47);</script></strong>: <script type="text/javascript">p(52);</script></h2>
+					<table id="devicebox">
+						<tr class="trhead">
+							<td colspan="3" class="tdleft"><strong><script type="text/javascript">p(16);</script></strong></td>
+							<td colspan="2"><strong><script type="text/javascript">p(17);</script></strong></td>
+							<td colspan="4"><strong><script type="text/javascript">p(40);</script></strong></td>
+						</tr>
+						<tr class="trhead trheadrow2">
+							<td class="tdleft"><strong><script type="text/javascript">p(66);</script></strong></td>
+							<td class="tdleft"><strong><script type="text/javascript">p(36);</script></strong></td>
+							<td class="tdleft"><strong><script type="text/javascript">p(62);</script></strong></td>
+							<td width="80"><strong><script type="text/javascript">p(41);</script></strong></td>
+							<td width="80"><strong><script type="text/javascript">p(42);</script></strong></td>
+							<td width="80"><strong><script type="text/javascript">p(30);</script></strong></td>
+							<td width="80"><strong><script type="text/javascript">p(31);</script></strong></td>
+							<td width="80"><strong><script type="text/javascript">p(32);</script></strong></td>
+							<td width="80"><strong><script type="text/javascript">p(33);</script></strong></td>
+						</tr>
+					</table>
+			</div>
+			<div id="tab4" class="tab">
+				<h2><strong><script type="text/javascript">p(53);</script></strong>: <script type="text/javascript">p(54);</script></h2>
+				<div class="halfbox">
+					<h3><strong><script type="text/javascript">p(55);</script></strong></h3>
+					<table class="result">
+						<tr>
+							<td class="descr"><script type="text/javascript">p(26);</script></td>
+							<td id="result_mincapacity24v"></td>
+						</tr>
+						<tr>
+							<td class="descr"><script type="text/javascript">p(14);</script>:</td>
+							<td id="result_standbytime"></td>
+						</tr>
+						<tr>
+							<td class="descr"><script type="text/javascript">p(15);</script></td>
+							<td id="result_alarmtime"></td>
+						</tr>
+					</table>
+				</div>
+<!--
+				<div class="fullbox">
+						<h3><strong><script type="text/javascript">p(29);</script></strong></h3>
+						<table class="result">
+							<tr>
+								<td class="art">581721</td><td class="descrsmall"><script type="text/javascript">p(56);</script></td>
+								<td id="result_accu1"></td>
+							</tr>
+							<tr>
+								<td class="art">581722/581724</td><td class="descrsmall"><script type="text/javascript">p(68);</script></td>
+								<td id="result_accu1"></td>
+							</tr>
+							<tr>
+								<td class="art">581723/581725</td><td class="descrsmall"><script type="text/javascript">p(69);</script></td>
+								<td id="result_accu1"></td>
+							</tr>
+							<tr>
+								<td class="art">581732</td><td class="descrsmall"><script type="text/javascript">p(67);</script></td>
+								<td id="result_accu4"></td>
+							</tr>
+							<tr>
+								<td class="art">581730</td><td class="descrsmall"><script type="text/javascript">p(57);</script></td>
+								<td id="result_accu2"></td>
+							</tr>
+							<tr>
+								<td class="art">581731</td><td class="descrsmall"><script type="text/javascript">p(58);</script></td>
+								<td id="result_accu3"></td>
+							</tr>
+
+						</table>
+				</div>
+-->
+				</div>
+		</div>
+	</form>
+	<div id="navigation"> <a href="#" class="back" id="btn-back" onclick="tabBack();"><script type="text/javascript">p(59);</script></a> <a href="#" class="next" id="btn-next" onclick="tabNext();"><script type="text/javascript">p(60);</script></a><a href="javascript:print();" id="btn-print" class="print"><script type="text/javascript">p(61);</script></a></div>
+	<div id="counter"> </div>
+</div>
+<div id="help"> <a href="#" class="close" onclick="toggleHelp();"><script type="text/javascript">p(70);</script></a>
+<div id="inner">
+	<h4><script type="text/javascript">p(71);</script></h4>
+		<div id="part1"><p><script type="text/javascript">p(72);</script></p></div>
+		<div id="part2"><p><script type="text/javascript">p(73);</script></p></div>
+		<div id="part3"><p><script type="text/javascript">p(74);</script></p></div>
+		<div id="part4"><p><script type="text/javascript">p(75);</script></p></div>
+</div>
+</div>
+<div id="printcontainer">
+	<div id="logo"><img src="images/print_variodynlogo.jpg" width="200" height="52" alt="Variodyn" /></div>
+	<h1><script type="text/javascript">p(64);</script></h1>
+	<h2><script type="text/javascript">p(50);</script></h2>
+	<table style="margin-left:10px">
+		<tr>
+			<td class="first"><script type="text/javascript">p(2);</script></td>	<td id="print_projectname"></td>
+		</tr>
+		<tr>
+			<td class="first"><script type="text/javascript">p(3);</script></td>	<td id="print_projectnumber"></td>
+		</tr>
+		<tr>
+			<td class="first"><script type="text/javascript">p(4);</script></td>	<td id="print_creationdate"></td>
+		</tr>
+		<tr>
+			<td class="first"><script type="text/javascript">p(5);</script></td>	<td id="print_name"></td>
+		</tr>
+		<tr>
+			<td class="first"><script type="text/javascript">p(6);</script></td>	<td id="print_email"></td>
+		</tr>
+		<tr>
+			<td class="first"><script type="text/javascript">p(7);</script></td>	<td id="print_tel"></td>
+		</tr>
+		<tr>
+			<td class="first"><script type="text/javascript">p(8);</script></td>	<td id="print_fax"></td>
+		</tr>
+	</table>
+	<h2><script type="text/javascript">p(47);</script> <script type="text/javascript">p(52);</script></h2>
+		<table id="print_devicebox" style="font-size:0.9em;margin-left:10px;" cellpadding="0" cellspacing="0">
+						<tr class="trhead">
+							<td colspan="3" class="tdleft">&nbsp;</td>
+							<td colspan="2" align="center"><strong><script type="text/javascript">p(17);</script></strong></td>
+							<td colspan="4" align="center"><strong><script type="text/javascript">p(40);</script></strong></td>
+						</tr>
+						<tr class="trhead trheadrow2">
+							<td class="tdleft" align="center"><strong><script type="text/javascript">p(66);</script></strong></td>
+							<td class="tdleft" align="center"><strong><script type="text/javascript">p(36);</script></strong></td>
+							<td class="tdleft" width="200" align="center"><strong><script type="text/javascript">p(62);</script></strong></td>
+							<td width="50" align="center"><strong><script type="text/javascript">p(41);</script></strong></td>
+							<td width="50" align="center"><strong><script type="text/javascript">p(42);</script></strong></td>
+							<td width="60" align="center"><strong><script type="text/javascript">p(30);</script></strong></td>
+							<td width="60" align="center"><strong><script type="text/javascript">p(31);</script></strong></td>
+							<td width="60" align="center"><strong><script type="text/javascript">p(32);</script></strong></td>
+							<td width="60" align="center"><strong><script type="text/javascript">p(33);</script></strong></td>
+						</tr>
+					</table>
+	<h2><script type="text/javascript">p(55);</script></h2>
+					<table class="projectdata" style="margin-left:10px">
+						<tr>
+							<td class="descr"><script type="text/javascript">p(26);</script></td>
+							<td id="print_result_mincapacity24v"></td>
+						</tr>
+						<tr>
+							<td class="descr"><script type="text/javascript">p(14);</script></td>
+							<td id="print_result_standbytime"></td>
+						</tr>
+						<tr>
+							<td class="descr"><script type="text/javascript">p(15);</script></td>
+							<td id="print_result_alarmtime"></td>
+						</tr>
+					</table>
+<!--
+						<h2><script type="text/javascript">p(29);</script></h2>
+						<table class="result" style="margin-left:10px">
+							<tr>
+								<td class="art">581721</td><td class="descrsmall"><script type="text/javascript">p(56);</script></td>
+								<td id="result_accu1"></td>
+							</tr>
+							<tr>
+								<td class="art">581722/581724</td><td class="descrsmall"><script type="text/javascript">p(68);</script></td>
+								<td id="result_accu1"></td>
+							</tr>
+							<tr>
+								<td class="art">581723/581725</td><td class="descrsmall"><script type="text/javascript">p(69);</script></td>
+								<td id="print_result_accu1"></td>
+							</tr>
+
+							<tr>
+								<td class="art">581732</td><td class="descrsmall"><script type="text/javascript">p(67);</script></td>
+								<td id="print_result_accu4"></td>
+							</tr>
+							<tr>
+								<td class="art">581730</td><td class="descrsmall"><script type="text/javascript">p(57);</script></td>
+								<td id="print_result_accu2"></td>
+							</tr>
+							<tr>
+								<td class="art">581731</td><td class="descrsmall"><script type="text/javascript">p(58);</script></td>
+								<td id="print_result_accu3"></td>
+							</tr>
+						</table>	
+-->
+	<div id="footer"></div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>
